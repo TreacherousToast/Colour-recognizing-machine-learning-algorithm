@@ -48,9 +48,13 @@ void draw()
 }
 void keyPressed()
 {
-  if (key != ENTER && key != RETURN)
+  if (key != ENTER && key != RETURN&&key != BACKSPACE)
   {
     inputStr += key;
+  }
+  else if (key == BACKSPACE)
+  {
+    inputStr = "";
   }
   else
   {
@@ -131,7 +135,7 @@ void keyPressed()
         inputStr = "";
       }
     }
-    else if (running == true) // ---------------------------RUNNING--------------------------------- //<>// //<>//
+    else if (running == true) // ---------------------------RUNNING--------------------------------- //<>//
     {
       rInRange = false;
       gInRange = false;
