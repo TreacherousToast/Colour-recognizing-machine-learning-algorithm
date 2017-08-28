@@ -73,7 +73,7 @@ class compilationNode
     {
       colour = "Red";
     }
-    else if(currCombination[0] == false && combination[1] == true && combination[2] == false)
+    else if(combination[0] == false && combination[1] == true && combination[2] == false) // MESSED UP WITH YELLOW
     {
       colour = "Green";
     }
@@ -81,7 +81,7 @@ class compilationNode
     {
       colour = "Blue";
     }
-    else if(combination[0] == true && combination[1] == true && combination[2] == false)
+    else if(combination[0] == true && combination[1] == true && combination[2] == false) // NOT WORKING
     {
       colour = "Yellow";
     }
