@@ -2,6 +2,7 @@ rNode r = new rNode();
 gNode g = new gNode();
 bNode b = new bNode();
 compilationNode c = new compilationNode();
+boolean readFromFile = false; // change to true to read from training.txt
 boolean trainingRound1 = true;
 boolean trainingRound2 = false;
 boolean running = false;
@@ -19,6 +20,39 @@ int currColour = 0;
 void setup()
 {
   size(640,360);
+  if (readFromFile == true)
+  {
+    String[] lines = loadStrings("training.txt");
+    for (int i = 0; i < 12; i++)
+      {
+        if (colourTrainingNum == 0)
+        {
+          r.trainMinMax(int(lines[i]));
+          colourTrainingNum = 1;
+        }
+        else if (colourTrainingNum == 1)
+        {
+          g.trainMinMax(int(lines[i]));
+          colourTrainingNum = 2;
+        }
+        else if (colourTrainingNum == 2)
+        {
+          b.trainMinMax(int(lines[i]));
+          colourTrainingNum = 0;
+        }
+      }
+      for (int i = 0; i < 7; i++)
+      {
+        int[] nums = int(split(lines[i+12], ", "));
+        rInRange = r.checkIfIsInRange(nums[0]);
+        gInRange = g.checkIfIsInRange(nums[1]);
+        bInRange = b.checkIfIsInRange(nums[2]);
+        c.trainColourCombinations(rInRange,gInRange,bInRange,i);
+      }
+      trainingRound1 = false;
+      trainingRound2 = false;
+      running = true;
+  }
 }
 void draw()
 {
@@ -58,37 +92,39 @@ void keyPressed()
   }
   else
   {
+    if (readFromFile == false)
+    {
     if (trainingRound1 == true) // --------------TRAINING ROUND 1------------------------
     {
       if (entryTimes < 11)
       {
-      if (colourTrainingNum == 0)
-      {
-        r.trainMinMax(int(inputStr));
-        inputStr = "";
-        colourTrainingNum = 1;
+        if (colourTrainingNum == 0)
+        {
+          r.trainMinMax(int(inputStr));
+          inputStr = "";
+          colourTrainingNum = 1;
+        }
+        else if (colourTrainingNum == 1)
+        {
+          g.trainMinMax(int(inputStr));
+          inputStr = "";
+          colourTrainingNum = 2;
+        }
+        else if (colourTrainingNum == 2)
+        {
+          b.trainMinMax(int(inputStr));
+          inputStr = "";
+          colourTrainingNum = 0;
+        }
       }
-      else if (colourTrainingNum == 1)
+      else
       {
-        g.trainMinMax(int(inputStr));
+        trainingRound1 = false;
+        trainingRound2 = true;
+        entryTimes = 0;
         inputStr = "";
-        colourTrainingNum = 2;
       }
-      else if (colourTrainingNum == 2)
-      {
-        b.trainMinMax(int(inputStr));
-        inputStr = "";
-        colourTrainingNum = 0;
-      }
-    }
-    else
-    {
-      trainingRound1 = false;
-      trainingRound2 = true;
-      entryTimes = 0;
-      inputStr = "";
-    }
-    entryTimes++;
+      entryTimes++;
     }
     else if (trainingRound2 == true) // ---------------------TRAINING ROUND 2-------------------
     {
@@ -135,7 +171,8 @@ void keyPressed()
         inputStr = "";
       }
     }
-    else if (running == true) // ---------------------------RUNNING--------------------------------- //<>//
+    }
+    if (running == true) // ---------------------------RUNNING--------------------------------- 
     {
       rInRange = false;
       gInRange = false;
