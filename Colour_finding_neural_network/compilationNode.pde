@@ -7,6 +7,7 @@ class compilationNode
   boolean[] purpleCombination = {false,false,false};
   boolean[] whiteCombination = {false,false,false};
   boolean[] cyanCombination = {false,false,false};
+  boolean[] blackCombination = {false,false,false};
   boolean[] currCombination = {false,false,false};
   
   void trainColourCombinations(boolean rInRange, boolean gInRange, boolean bInRange, int colour) // NOT WORKING
@@ -57,6 +58,12 @@ class compilationNode
       cyanCombination[1] = currCombination[1];
       cyanCombination[2] = currCombination[2];
     }
+    else if (colour == 7)
+    {
+      blackCombination[0] = currCombination[0];
+      blackCombination[1] = currCombination[1];
+      blackCombination[2] = currCombination[2];
+    }
     currCombination[0] = false;
     currCombination[1] = false;
     currCombination[2] = false;
@@ -69,33 +76,37 @@ class compilationNode
     combination[1] = inRangeG;
     combination[2] = inRangeB;
     
-    if(combination[0] == true && combination[1]== false && combination[2] == false)
+    if(combination[0] == redCombination[0] && combination[1]== redCombination[1] && combination[2] == redCombination[2])
     {
       colour = "Red";
     }
-    else if(combination[0] == false && combination[1] == true && combination[2] == false) // MESSED UP WITH YELLOW
+    else if(combination[0] == greenCombination[0] && combination[1] == greenCombination[1] && combination[2] == greenCombination[2])
     {
       colour = "Green";
     }
-    else if(combination[0]== false && combination[1] == false && combination[2] == true)
+    else if(combination[0]== blueCombination[0] && combination[1] == blueCombination[1] && combination[2] == blueCombination[2])
     {
       colour = "Blue";
     }
-    else if(combination[0] == true && combination[1] == true && combination[2] == false) // NOT WORKING
+    else if(combination[0] == yellowCombination[0] && combination[1] == yellowCombination[1] && combination[2] == yellowCombination[2])
     {
       colour = "Yellow";
     }
-    else if(combination[0] == true && combination[1] == false && combination[2] == true)
+    else if(combination[0] == purpleCombination[0] && combination[1] == purpleCombination[1] && combination[2] == purpleCombination[2])
     {
       colour = "Purple";
     }
-    else if(combination[0] == true && combination[1] == true && combination[2] == true)
+    else if(combination[0] == whiteCombination[0] && combination[1] == whiteCombination[1] && combination[2] == whiteCombination[2])
     {
       colour = "White";
     }
-    else if(combination[0] == false && combination[1] == true && combination[2] == true)
+    else if(combination[0] == cyanCombination[0] && combination[1] == cyanCombination[1] && combination[2] == cyanCombination[2])
     {
       colour = "Cyan";
+    }
+    else if (combination[0] == blackCombination[0]&&combination[1] == blackCombination[1]&&combination[2] == blackCombination[2])
+    {
+      colour = "Black";
     }
     return colour;
   }
