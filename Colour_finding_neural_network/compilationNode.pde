@@ -10,7 +10,7 @@ class compilationNode
   boolean[] blackCombination = {false,false,false};
   boolean[] currCombination = {false,false,false};
   
-  void trainColourCombinations(boolean rInRange, boolean gInRange, boolean bInRange, int colour) // NOT WORKING
+  void trainColourCombinations(boolean rInRange, boolean gInRange, boolean bInRange, int colour)
   {
     currCombination[0] = rInRange;
     currCombination[1] = gInRange;
