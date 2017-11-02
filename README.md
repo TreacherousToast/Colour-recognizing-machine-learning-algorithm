@@ -1,2 +1,2 @@
-# Colour-recognizing-neural-network
-A neural network that recognizes RGB values that you input
+# Colour-recognizing-machine-learning-algorithm
+A decision tree that recognizes RGB values that you input
